@@ -1,15 +1,16 @@
-#include <Adafruit_ADS1015.h>
-
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <elapsedMillis.h>
+#include <ArduinoJson.h>
 
 #include "configuration.h" // This is the configuration file with passwords and stuff
 
 #define MQTT_SERVER "mqtt.pndsn.com"
 #define MQTT_CHANNEL "pubnub-sensor-network"
 #define MQTT_CLIENT_ID "demo/sub-c-5f1b7c8e-fbee-11e3-aa40-02ee2ddab7fe/knichols"
+
+StaticJsonDocument<256> doc;
 
 // TO keep track of time 
 elapsedMillis timeSinceCreated;
@@ -21,19 +22,42 @@ unsigned int tenSecInterval = 10000;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
+
+
 void callback(char* topic, byte* payload, unsigned int length) {
  
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
  
   Serial.print("Message:");
+  //for (int i = 0; i < length; i++) {
+  //  Serial.print((char)payload[i]);
+  //}
+
+  String myString;
+  //for (char c : payload) myString += c;
+
   for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
+    myString +=(char)payload[i];
   }
- 
+  
   Serial.println();
   Serial.println("-----------------------");
- 
+
+  deserializeJson(doc, myString);
+  JsonObject root = doc.as<JsonObject>(); // get the root object
+  
+  long timestamp = root["timestamp"];
+  const char* ambient_temperature = root["ambient_temperature"];
+  const char* humidity = root["humidity"];
+  const char* sensor_uuid = root["sensor_uuid"];
+  const char* radiation_level = root["radiation_level"];
+  const char* photosensor = root["photosensor"];
+  //const char* sensor_group; // = sensor_uuid.substring(0, 7);
+  //strcpy(sensor_uuid, sensor_group, 7);
+  String sensor_greoup = String(sensor_uuid).substring(0, 7);
+
+
 }
 
 void setup() {

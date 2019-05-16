@@ -1,0 +1,12 @@
+group_name,sensor_uuid_starts_with,latitude,longitude,place
+group_0,probe-0,-16.876261,145.753509,Melbourne TW
+group_1,probe-1,-33.866239,151.206597,Sydney TW
+group_2,probe-2,-12.4666,130.846727,Darwin Waterfront
+group_3,probe-3,-33.85649,151.215307,Operate House
+group_4,probe-4,-37.81631,144.963862,Melbourne TW
+group_5,probe-5,-37.811645,144.937466,Melbourne Star Observation Wheel
+group_6,probe-6,-27.465731,153.027659,Brisbane TW
+group_7,probe-7,-28.006011,153.429668,Surfers Paradise (Q1)
+group_8,probe-8,-35.307217,149.123062,Parliament House
+group_9,probe-9,-34.914081,138.604649,Adelaide Zoo
+group_10,probe-[a-zA-Z],-31.95866,115.858317,Perth (Bell Tower)

@@ -15,7 +15,7 @@ pubnub = PubNub(pnconfig)
 
 def write_message_to_csv(message):
 
-    with open('data.csv', 'a', newline='') as csvfile:
+    with open('data.csv', 'a') as csvfile:
         sensorwriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         sensorwriter.writerow(message.values())
  

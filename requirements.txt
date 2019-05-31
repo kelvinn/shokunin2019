@@ -1,1 +1,3 @@
 pubnub>=4.1.3
+pandas
+jupyter
